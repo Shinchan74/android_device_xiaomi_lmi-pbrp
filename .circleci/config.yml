@@ -1,35 +1,14 @@
+# Use the latest 2.1 version of CircleCI pipeline process engine. See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
-jobs:
-  build:
-    docker:
-      # Use this New Image for Starting things up
-      - image: fr3akyphantom/droid-runner:latest # DO Not Change
-    environment:
-      MANIFEST_BRANCH: 'android-10.0'
-      VERSION: '3.0.0'
-      MAINTAINER: 'Shinchan'
-      VENDOR: 'xiaomi'
-      CODENAME: 'Imi'
-      BUILD_LUNCH: 'omni_lmi-eng'
-      FLAVOR: "eng"
-      TEST_BUILD: 'true'
-      CHANGELOG: |
-         Initial Test Build
-    working_directory: /home/builder/
-    steps:
-      - setup_remote_docker:
-          version: 19.03.8
-      - run:
-          name: "ALL IN REMOTE"
-          command: |
-            curl -sL https://raw.githubusercontent.com/PitchBlackRecoveryProject/vendor_utils/Tess/remote_build.sh -o build.sh
-            source build.sh
+# Use a package of configuration called an orb.
+orbs:
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+# Orchestrate or schedule a set of jobs
 workflows:
-  version: 2
-  remote_builder:
+  # Name the workflow "welcome"
+  welcome:
+    # Run the welcome/run job in its own container
     jobs:
-      - build:
-          filters:
-            branches:
-              only: 'android-10.0'
-          context: shinchan
+      - welcome/run
+
