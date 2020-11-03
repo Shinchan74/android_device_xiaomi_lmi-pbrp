@@ -7,9 +7,9 @@ jobs:
     environment:
       MANIFEST_BRANCH: 'android-10.0'
       VERSION: '3.0.0'
-      MAINTAINER: '@PBRP team'
+      MAINTAINER: 'Shinchan'
       VENDOR: 'xiaomi'
-      CODENAME: 'lmi'
+      CODENAME: 'Imi'
       BUILD_LUNCH: 'omni_lmi-eng'
       FLAVOR: "eng"
       TEST_BUILD: 'true'
@@ -32,4 +32,4 @@ workflows:
           filters:
             branches:
               only: 'android-10.0'
-          context: raza
+          context: shinchan
